@@ -1,63 +1,78 @@
-# Trade Order Validation & Classification (BNP Paribas Simulation)
+# MarketAxess Trade Data Validator
 
-This project simulates a real-world trade order validation pipeline inspired by financial institutions like **BNP Paribas**.  
-It demonstrates how a Business Analyst can structure data validation and classification logic using Python in a scalable and efficient way.
+This project delivers a scalable Python-based data validation framework tailored for validating trade data sourced from MarketAxess, a leading institutional electronic trading platform for fixed income securities.
 
----
-
-## Project Objectives
-
-- Validate large trade order datasets using chunked reading
-- Flag executed orders using optimized logic (`np.where`)
-- Simulate data quality control processes in a trading environment
-- Create clean and modular Python scripts for enterprise-level workflows
+It reflects how a **Senior Business Analyst** can collaborate in data-heavy environments to ensure the accuracy, consistency, and audit-readiness of trade-related data pipelines.
 
 ---
 
-## Dataset Description
+## **How It Works**
 
-The dataset consists of **1,000,000 synthetic trade orders** with the following attributes:
-
-- `order_id` — Unique identifier of the trade
-- `account_id` — Associated client account
-- `amount` — Trade amount (float)
-- `status` — Trade status: `Executed`, `Pending`, or `Failed`
-
----
-
-## Scripts Overview
-
-| File | Description |
-|------|-------------|
-| `generate_order_data.py` | Generates 1M synthetic trade orders |
-| `order_status.py` | Flags executed orders using `np.where` |
-| `validate_chunks.py` | Validates `amount` field using chunk-size for performance |
-| `labeled_orders.csv` | Result dataset with `status_flag` column |
-| `invalid_orders.csv` | Output for invalid records if any exist |
+1. **Data Ingestion**: Loads synthetic trade records (order ID, price, quantity, symbol, and execution status) simulating real-world datasets.
+2. **Validation Rules**:
+   - Flags invalid statuses outside predefined values (`Executed`, `Cancelled`, `Pending`)
+   - Detects trade orders with 0 quantity but marked as executed
+3. **Discrepancy Checks**:
+   - Verifies field-level accuracy (price, quantity, etc.)
+   - Ensures each order has a valid status and execution flag
+4. **Outputs**:
+   - Exports validation summaries and discrepancies in CSV format
+   - Ready-to-ingest for dashboards or QA pipelines
 
 ---
 
-## Technologies Used
+## **Project Objectives**
 
-- Python 3.12
-- Pandas
-- NumPy
-- CSV file handling
-- Chunked data processing
-- Clean modular scripting
+- Build robust data validation scripts for batch processing of trade logs  
+- Highlight data quality issues using clear rule-based logic  
+- Support QA/Compliance by generating explainable, structured outputs  
+- Showcase how Business Analysts bridge the gap between technical validation and regulatory reporting
 
 ---
 
-## Author
+## **Dataset Description**
 
-**Ahmet Güçlü**  
+Synthetic data with the following fields:
+
+- `order_id` – Unique trade identifier  
+- `symbol` – Security symbol  
+- `quantity` – Number of units traded  
+- `price` – Trade price  
+- `status` – Execution status (`Executed`, `Pending`, `Cancelled`)  
+
+---
+
+## **Scripts Overview**
+
+| Script                   | Description                                        |
+|--------------------------|----------------------------------------------------|
+| `generate_trade_data.py` | Creates synthetic trade records                    |
+| `detect_discrepancies.py`| Identifies data mismatches across fields           |
+| `compare_trades.py`      | Compares updated vs. baseline data for accuracy    |
+| `field_validation.csv`   | Lists rules for expected field behavior            |
+| `validation_result.csv`  | Output summary of invalid or inconsistent trades   |
+
+---
+
+## **Technologies Used**
+
+- Python 3.12  
+- Pandas  
+- Numpy  
+- Modular scripting with CSV reporting
+
+---
+
+## **Business Impact**
+
+- Strengthens data trust in post-trade analysis  
+- Enables faster QA cycles by automating anomaly detection  
+- Enhances reporting transparency in compliance processes  
+
+---
+
+## **Author**
+
+**Ahmet GUCLU**  
 Senior Business Analyst  
-ahmetguclu.dev | [LinkedIn Profile] | [GitHub Profile]
-
----
-
-## Notes
-
-This project is **inspired by real BA work** conducted within capital markets and trading systems.  
-It serves as a portfolio simulation for data mapping, validation, and classification processes in large-scale financial environments.
-
+[LinkedIn Profile] | [GitHub Profile]
